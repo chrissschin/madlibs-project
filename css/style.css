@@ -20,3 +20,8 @@
   float:right;
   margin-top: 2em;
 }
+
+.error {
+  display: block;
+  color: red;
+}

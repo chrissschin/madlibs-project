@@ -44,7 +44,14 @@ angular.module("myApp",[])
 
   }
 
-
-  // $scope.mainCont = false;
+  $scope.submit = function() {
+      console.log($scope.inputForm);
+      
+      if( $scope.inputForm.$valid ) {
+        $scope.genMadLib();
+    } else {
+        console.log('The form is invalid');
+    }
+  }
 
 });

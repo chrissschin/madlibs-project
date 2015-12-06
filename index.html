@@ -18,12 +18,12 @@
     </div>
   </header>
 
-  <section class="container" id="input-words">
+  <section class="container" id="input-words" ng-show="inputWords" >
     <section>
       <h1>Provide the following words:</h1>
     </section>
   <div class ='row'>
-    <form name="inputForm" ng-show="inputWords">
+    <form name="inputForm" novalidate ng-submit="submit()">
       <div>
         <!-- male female radio buttons -->
         <input type="radio" ng-checked="{{gender.pronoun == 'he'}}" ng-click="gender.pronoun='he';gender.poss='his'" id="male" name="gender" value="male" placeholder="">
@@ -33,22 +33,31 @@
         <label for="gender">Female</label>
       </div>
       <!-- enter words -->
-      <input class='col-xs-4' type="text" ng-model="femalename" placeholder="female name" required>
+      <input class='col-xs-4' name='femaleName' type="text" ng-model="femalename" placeholder="female name" required>
       <input class='col-xs-4' name='jobtitle' type="text" ng-model="jobtitle" placeholder="job title" required>
-      <input class='col-xs-4' type="text" ng-model="tedioustask" placeholder="tedious task" required>
-      <input class='col-xs-4' type="text" ng-model="dirtytask" placeholder="dirty task" required>
-      <input class='col-xs-4' type="text" ng-model="celebrity" placeholder="celebrity" required>
-      <input class='col-xs-4' type="text" ng-model="uselessskill" placeholder="useless skill" required>
-      <input class='col-xs-4' type="text" ng-model="obnoxious" placeholder="obnoxious celebrity" required>
-      <input class='col-xs-4' type="number" ng-model="hugenumber" placeholder="huge number" required>
-      <input class='col-xs-4' type="text" ng-model="adjective" placeholder="adjective" required>
+      <input class='col-xs-4' name='tedioustask'type="text" ng-model="tedioustask" placeholder="tedious task" required>
+      <input class='col-xs-4' name ='dirtyTask' type="text" ng-model="dirtytask" placeholder="dirty task" required>
+      <input class='col-xs-4' name='celebrity' type="text" ng-model="celebrity" placeholder="celebrity" required>
+      <input class='col-xs-4' name='uselessSkill'type="text" ng-model="uselessskill" placeholder="useless skill" required>
+      <input class='col-xs-4' name='obnoxious' type="text" ng-model="obnoxious" placeholder="obnoxious celebrity" required>
+      <input class='col-xs-4' name='hugeNumber' type="number" ng-model="hugenumber" placeholder="huge number" required>
+      <input class='col-xs-4' name='adjective' type="text" ng-model="adjective" placeholder="adjective" required>
+      <button id="generate-btn" ng-click='submit()'>Generate</button>
     </form>
   </div>
   </section>
 
   <section class='container' ng-show="inputWords">
-    <button id="generate-btn" ng-click='genMadLib()' >Generate yo</button>
-    <span ng-if="inputForm.jobtitle.$error.required">job title required!</span>
+    <span class="error" ng-if="inputForm.$submitted && inputForm.femaleName.$error.required">Female name is required!</span>
+    <span class="error" ng-if="inputForm.$submitted && inputForm.jobtitle.$error.required">job title required!</span>
+    <span class="error" ng-if="inputForm.$submitted && inputForm.tedioustask.$error.required">tedious task required!</span>
+    <span class="error" ng-if="inputForm.$submitted && inputForm.dirtyTask.$error.required">Dirty Task is required!</span>
+    <span class="error" ng-if="inputForm.$submitted && inputForm.celebrity.$error.required">Celebrity Name is required!</span>
+    <span class="error" ng-if="inputForm.$submitted && inputForm.uselessSkill.$error.required">Useless skill required!</span>
+    <span class="error" ng-if="inputForm.$submitted && inputForm.obnoxious.$error.required">Obnoxious celebrity name required!</span>
+    <span class="error" ng-if="inputForm.$submitted && inputForm.hugeNumber.$error.required">Huge number is required!</span>
+    <span class="error" ng-if="inputForm.$submitted && inputForm.tedioustask.$error.required">Adjective required!</span>
+
   </section>
 
   <section ng-show="madLibOut" class="container" id="main-content">
@@ -59,7 +68,7 @@
      What a great decision! With <strong>{{ gender.poss }}</strong> new skills, <strong>{{femalename}}</strong> built a(n) <strong>{{adjective}}</strong> robot named <strong>{{obnoxious}}</strong> that not only loved <strong>{{dirtytask}} </strong>but did it <strong>{{hugenumber}}</strong> faster.
     </p>
 
-    <button class="pull-right" ng-click="reset()">Start over!</button>
+    <button ng-click="reset()">Start over!</button>
 
   </section>
 
