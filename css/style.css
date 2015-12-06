@@ -2,10 +2,21 @@
 
 .top-pics img {
   display:inline;
+  /*border: 5px solid black;*/
 }
 
 #input-words {
   padding-top: 2em;
   padding-bottom: 2em;
+  border-bottom: 3px solid black;
+}
 
+#main-content {
+  padding-top: 2em;
+  font-size: 1.5em
+}
+
+#generate-btn {
+  float:right;
+  margin-top: 2em;
 }

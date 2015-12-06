@@ -6,13 +6,15 @@
   <title>Document</title>
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/style.css">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js" type="text/javascript"></script>
+  <script src="./myApp.js"></script>
 </head>
 <body ng-controller="myCtrl">
   <header class='container'>
     <div class='top-pics'>
       <img class='img-responsive' src="images/mad-lib-happy-face.png" alt="" />
       <img class='img-responsive' src="images/ng-mad-libs-logo.png" alt="">
+      <h1>AUTOMATE THIS:</h1>
     </div>
   </header>
 
@@ -20,26 +22,36 @@
     <section>
       <h1>Provide the following words:</h1>
     </section>
-    <div class ='row'>
-  <div>
-    <input type="radio" ng-checked="{{gender.pronoun == 'he'}}" ng-click="gender.pronoun='he';gender.poss='his'" id="male" name="gender" value="male" placeholder="">
-    <label for="gender">Male</label>
+  <div class ='row'>
+    <form name="inputForm" ng-show="inputWords">
+      <div>
+        <!-- male female radio buttons -->
+        <input type="radio" ng-checked="{{gender.pronoun == 'he'}}" ng-click="gender.pronoun='he';gender.poss='his'" id="male" name="gender" value="male" placeholder="">
+        <label for="gender">Male</label>
 
-    <input type="radio" ng-checked="{{gender.pronoun == 'she'}}" ng-click="gender.pronoun='she';gender.possessive='her'" id="female" name="gender" value="female" placeholder="">
-    <label for="gender">Female</label>
-  </div>
-      <input class='col-xs-4' type="text" ng-model-options="{ updateOn: 'blur' }" ng-model="femalename" placeholder="female name">
-      <input class='col-xs-4' type="text" ng-model="jobtitle" placeholder="job title">
-      <input class='col-xs-4' type="text" ng-model="tedioustask" placeholder="tedious task">
-      <input class='col-xs-4' type="text" ng-model="dirtytask" placeholder="dirty task">
-      <input class='col-xs-4' type="text" ng-model="celebrity" placeholder="celebrity">
-      <input class='col-xs-4' type="text" ng-model="uselessskill" placeholder="useless skill">
-      <input class='col-xs-4' type="text" ng-model="obnoxious" placeholder="obnoxious celebrity">
-      <input class='col-xs-4' type="text" ng-model="hugenumber" placeholder="huge number">
-      <input class='col-xs-4' type="text" ng-model="adjective" placeholder="adjective">
+        <input type="radio" ng-checked="{{gender.pronoun == 'she'}}" ng-click="gender.pronoun='she';gender.poss='her'" id="female" name="gender" value="female" placeholder="">
+        <label for="gender">Female</label>
+      </div>
+      <!-- enter words -->
+      <input class='col-xs-4' type="text" ng-model="femalename" placeholder="female name" required>
+      <input class='col-xs-4' name='jobtitle' type="text" ng-model="jobtitle" placeholder="job title" required>
+      <input class='col-xs-4' type="text" ng-model="tedioustask" placeholder="tedious task" required>
+      <input class='col-xs-4' type="text" ng-model="dirtytask" placeholder="dirty task" required>
+      <input class='col-xs-4' type="text" ng-model="celebrity" placeholder="celebrity" required>
+      <input class='col-xs-4' type="text" ng-model="uselessskill" placeholder="useless skill" required>
+      <input class='col-xs-4' type="text" ng-model="obnoxious" placeholder="obnoxious celebrity" required>
+      <input class='col-xs-4' type="number" ng-model="hugenumber" placeholder="huge number" required>
+      <input class='col-xs-4' type="text" ng-model="adjective" placeholder="adjective" required>
+    </form>
   </div>
   </section>
-  <section class="container">
+
+  <section class='container' ng-show="inputWords">
+    <button id="generate-btn" ng-click='genMadLib()' >Generate yo</button>
+    <span ng-if="inputForm.jobtitle.$error.required">job title required!</span>
+  </section>
+
+  <section ng-show="madLibOut" class="container" id="main-content">
     <p>
       <strong>{{ femalename }}</strong> was a <strong>{{jobtitle}}</strong> who loved technology. Although <strong>{{ gender.pronoun }}</strong> loved parts of her job, <strong>{{ gender.pronoun }}</strong> absolutely hated  <strong>{{tedioustask}}</strong> and <strong>{{dirtytask}}</strong>. So, <strong>{{femalename}}</strong> met with <strong>{{gender.poss}} </strong>life mentor <strong>{{celebrity}}</strong> who told <strong>{{gender.poss}}</strong> to learn how to <strong>{{uselessskill}}</strong> with Thinkful. Thinkful didn't offer a course on how to <strong>{{uselessskill}}</strong> so <strong>{{ gender.pronoun }} </strong> studied programming instead.
     </p>
@@ -47,10 +59,11 @@
      What a great decision! With <strong>{{ gender.poss }}</strong> new skills, <strong>{{femalename}}</strong> built a(n) <strong>{{adjective}}</strong> robot named <strong>{{obnoxious}}</strong> that not only loved <strong>{{dirtytask}} </strong>but did it <strong>{{hugenumber}}</strong> faster.
     </p>
 
+    <button class="pull-right" ng-click="reset()">Start over!</button>
+
   </section>
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js" type="text/javascript"></script>
-  <script src="./myApp.js"></script>
+
 </body>
 </html>
