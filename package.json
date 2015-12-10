@@ -1,0 +1,27 @@
+{
+  "name": "madlib-proj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "myApp.js",
+  "dependencies": {
+    "angular": "^1.4.8",
+    "angular-animate": "^1.4.8"
+  },
+  "devDependencies": {
+    "angular": "^1.4.8",
+    "angular-animate": "^1.4.8"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrissschin/madlibs-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrissschin/madlibs-project/issues"
+  },
+  "homepage": "https://github.com/chrissschin/madlibs-project#readme"
+}

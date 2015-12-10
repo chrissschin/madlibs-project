@@ -1,4 +1,4 @@
-angular.module("myApp",[])
+angular.module("myApp",['ngAnimate'])
 .controller("myCtrl", function($scope){
   var self = this;
   $scope.femalename = "";
@@ -16,20 +16,24 @@ angular.module("myApp",[])
       poss: 'her'
   };
   //sets output to hide first
-  $scope.madLibOut = false;
-
-
-  $scope.inputWords = true;
+  $scope.madLibOut = true;
+  $scope.inputWords = false;
 
   //shows output of main-content
   $scope.genMadLib = function() {
-    this.madLibOut = true;
-    this.inputWords = false;
-  }
+
+    if( $scope.inputForm.$valid ) {
+      this.madLibOut = false;
+      this.inputWords = true;
+    } else {
+        console.log('The form is invalid');
+    }
+
+  };
 
   $scope.reset = function() {
-    this.madLibOut = false;
-    this.inputWords = true;
+    this.madLibOut = true;
+    this.inputWords = false;
     this.femalename = "";
     this.jobtitle = "";
     this.tedioustask = "";
@@ -42,16 +46,7 @@ angular.module("myApp",[])
 
     this.inputForm.$setPristine();
 
-  }
+  };
 
-  $scope.submit = function() {
-      console.log($scope.inputForm);
-      
-      if( $scope.inputForm.$valid ) {
-        $scope.genMadLib();
-    } else {
-        console.log('The form is invalid');
-    }
-  }
 
 });

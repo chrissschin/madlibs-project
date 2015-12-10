@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Document</title>
+
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js" type="text/javascript"></script>
-  <script src="./myApp.js"></script>
 </head>
-<body ng-controller="myCtrl">
+<body class="container" ng-controller="myCtrl">
   <header class='container'>
     <div class='top-pics'>
       <img class='img-responsive' src="images/mad-lib-happy-face.png" alt="" />
@@ -18,10 +17,9 @@
     </div>
   </header>
 
-  <section class="container" id="input-words" ng-show="inputWords" >
-    <section>
-      <h1>Provide the following words:</h1>
-    </section>
+  <section class="container" id="input-words" ng-hide="inputWords" >
+  <h1>Provide the following words:</h1>
+
   <div class ='row'>
     <form name="inputForm" novalidate ng-submit="submit()">
       <div>
@@ -42,12 +40,12 @@
       <input class='col-xs-4' name='obnoxious' type="text" ng-model="obnoxious" placeholder="obnoxious celebrity" required>
       <input class='col-xs-4' name='hugeNumber' type="number" ng-model="hugenumber" placeholder="huge number" required>
       <input class='col-xs-4' name='adjective' type="text" ng-model="adjective" placeholder="adjective" required>
-      <button id="generate-btn" ng-click='submit()'>Generate</button>
+      <button id="generate-btn" class="btn btn-primary" ng-click='genMadLib()'>Generate</button>
     </form>
   </div>
   </section>
 
-  <section class='container' ng-show="inputWords">
+  <section class='container'  ng-show="inputWords">
     <span class="error" ng-if="inputForm.$submitted && inputForm.femaleName.$error.required">Female name is required!</span>
     <span class="error" ng-if="inputForm.$submitted && inputForm.jobtitle.$error.required">job title required!</span>
     <span class="error" ng-if="inputForm.$submitted && inputForm.tedioustask.$error.required">tedious task required!</span>
@@ -60,7 +58,7 @@
 
   </section>
 
-  <section ng-show="madLibOut" class="container" id="main-content">
+  <section ng-hide="madLibOut" class="animated" id="main-content" >
     <p>
       <strong>{{ femalename }}</strong> was a <strong>{{jobtitle}}</strong> who loved technology. Although <strong>{{ gender.pronoun }}</strong> loved parts of her job, <strong>{{ gender.pronoun }}</strong> absolutely hated  <strong>{{tedioustask}}</strong> and <strong>{{dirtytask}}</strong>. So, <strong>{{femalename}}</strong> met with <strong>{{gender.poss}} </strong>life mentor <strong>{{celebrity}}</strong> who told <strong>{{gender.poss}}</strong> to learn how to <strong>{{uselessskill}}</strong> with Thinkful. Thinkful didn't offer a course on how to <strong>{{uselessskill}}</strong> so <strong>{{ gender.pronoun }} </strong> studied programming instead.
     </p>
@@ -68,10 +66,12 @@
      What a great decision! With <strong>{{ gender.poss }}</strong> new skills, <strong>{{femalename}}</strong> built a(n) <strong>{{adjective}}</strong> robot named <strong>{{obnoxious}}</strong> that not only loved <strong>{{dirtytask}} </strong>but did it <strong>{{hugenumber}}</strong> faster.
     </p>
 
-    <button ng-click="reset()">Start over!</button>
+    <button ng-click="reset()" class="btn btn-warning">Start over!</button>
 
   </section>
-
+  <script src="node_modules/angular/angular.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="node_modules/angular-animate/angular-animate.min.js"></script>
+  <script src="./myApp.js"></script>
 
 
 </body>
